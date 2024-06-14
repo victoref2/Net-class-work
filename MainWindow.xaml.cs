@@ -75,6 +75,15 @@ namespace Number_system_conveter
             }
         }
 
+        private void ipdigits1_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (!int.TryParse(e.Text, out int result) || result < 0 || result > 255)
+            {
+                e.Handled = true;
+            }
+        }
+
+
         public void Base_8_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (Base_8.IsFocused)

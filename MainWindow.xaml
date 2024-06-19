@@ -26,17 +26,66 @@
         </TabItem>
         <TabItem x:Name="Ipchecktab" Header="ip check">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="115*"/>
-                    <RowDefinition Height="88*"/>
-                </Grid.RowDefinitions>
-                <Label Content="IP adress" HorizontalAlignment="Left" Margin="35,35,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="ipdigits1" HorizontalAlignment="Left" Margin="111,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" Text="{Binding ElementName=ipdigits1limiter, Path=Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <Slider x:Name="ipdigits1limiter" HorizontalAlignment="Left" Margin="25,26,0,0" VerticalAlignment="Top" Width="0" Height="0" FontSize="1" Maximum="255" Minimum="0" Value="{Binding ElementName=ipdigits1, Path=Text, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox x:Name="ipbinary1" HorizontalAlignment="Left" Margin="103,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits1limiter, Path=Value, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="60"/>
-                <Label Content="Netmask" HorizontalAlignment="Left" Margin="35,95,0,0" VerticalAlignment="Top"/>
-                <Label Content="wildcard" HorizontalAlignment="Left" Margin="35,153,0,0" VerticalAlignment="Top"/>
+                <!-- IP Address Input -->
+                <Label Content="IP address" HorizontalAlignment="Left" Margin="35,35,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="ipdigits1" HorizontalAlignment="Left" Margin="111,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits2" HorizontalAlignment="Left" Margin="161,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits3" HorizontalAlignment="Left" Margin="211,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits4" HorizontalAlignment="Left" Margin="261,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
 
+                <!-- IP Address in Binary -->
+                <TextBox x:Name="ipbinary1" HorizontalAlignment="Left" Margin="111,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="ipbinary2" HorizontalAlignment="Left" Margin="161,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits2, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="ipbinary3" HorizontalAlignment="Left" Margin="211,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits3, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="ipbinary4" HorizontalAlignment="Left" Margin="261,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits4, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+
+                <!-- Netmask -->
+                <Label x:Name="Netmasklabel" Content="Netmask" HorizontalAlignment="Left" Margin="35,120,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="netmask1" HorizontalAlignment="Left" Margin="111,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask2" HorizontalAlignment="Left" Margin="161,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask3" HorizontalAlignment="Left" Margin="211,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask4" HorizontalAlignment="Left" Margin="261,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+
+                <!-- Netmask in Binary -->
+                <TextBox x:Name="netmaskbinary1" HorizontalAlignment="Left" Margin="111,157,0,0" TextWrapping="Wrap" Text="{Binding ElementName=netmask1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="netmaskbinary2" HorizontalAlignment="Left" Margin="161,157,0,0" TextWrapping="Wrap" Text="{Binding ElementName=netmask2, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="netmaskbinary3" HorizontalAlignment="Left" Margin="211,157,0,0" TextWrapping="Wrap" Text="{Binding ElementName=netmask3, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="netmaskbinary4" HorizontalAlignment="Left" Margin="261,157,0,0" TextWrapping="Wrap" Text="{Binding ElementName=netmask4, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+
+                <!-- Wildcard Mask -->
+                <Label x:Name="Wildcardlabel" Content="Wildcard" HorizontalAlignment="Left" Margin="35,200,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="wildcard1" HorizontalAlignment="Left" Margin="111,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard2" HorizontalAlignment="Left" Margin="161,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard3" HorizontalAlignment="Left" Margin="211,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard4" HorizontalAlignment="Left" Margin="261,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+
+                <!-- Wildcard in Binary -->
+                <TextBox x:Name="wildcardbinary1" HorizontalAlignment="Left" Margin="111,237,0,0" TextWrapping="Wrap" Text="{Binding ElementName=wildcard1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="wildcardbinary2" HorizontalAlignment="Left" Margin="161,237,0,0" TextWrapping="Wrap" Text="{Binding ElementName=wildcard2, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="wildcardbinary3" HorizontalAlignment="Left" Margin="211,237,0,0" TextWrapping="Wrap" Text="{Binding ElementName=wildcard3, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+                <TextBox x:Name="wildcardbinary4" HorizontalAlignment="Left" Margin="261,237,0,0" TextWrapping="Wrap" Text="{Binding ElementName=wildcard4, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
+
+                <!-- Network Class and Type Labels -->
+                <Label x:Name="staticipclass" Content="Network class:" HorizontalAlignment="Left" Margin="456,50,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="Staticnetworktype" Content="Subnet mask:" HorizontalAlignment="Left" Margin="456,115,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="networkclass" Content="" HorizontalAlignment="Left" Margin="534,51,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="networktype" Content="" HorizontalAlignment="Left" Margin="534,115,0,0" VerticalAlignment="Top"/>
+
+                <!-- Broadcast Address -->
+                <Label x:Name="BroadcastAddressLabel" Content="Broadcast address:" HorizontalAlignment="Left" Margin="456,180,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="BroadcastAddress" Content="" HorizontalAlignment="Left" Margin="556,180,0,0" VerticalAlignment="Top"/>
+                
+                <!-- Network Address -->
+                <Label x:Name="NetworkAddressLabel" Content="Network address:" HorizontalAlignment="Left" Margin="456,245,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="NetworkAddress" Content="" HorizontalAlignment="Left" Margin="548,245,0,0" VerticalAlignment="Top"/>
+
+                <!-- Usable Host Range -->
+                <Label x:Name="UsableHostRangeLabel" Content="Usable host range:" HorizontalAlignment="Left" Margin="456,310,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="UsableHostRange" Content="" HorizontalAlignment="Left" Margin="554,310,0,0" VerticalAlignment="Top"/>
+
+                
+                <!-- Calculate Button -->
+                <Button Content="Calculate" HorizontalAlignment="Left" Margin="35,270,0,0" VerticalAlignment="Top" Width="75" Click="Calculate_Click"/>
             </Grid>
         </TabItem>
     </TabControl>

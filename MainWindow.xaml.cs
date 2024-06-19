@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -175,5 +176,114 @@ namespace Number_system_conveter
 
             return result;
         }
+
+        private void Calculate_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(ipdigits1.Text, out int part1) &&
+                int.TryParse(ipdigits2.Text, out int part2) &&
+                int.TryParse(ipdigits3.Text, out int part3) &&
+                int.TryParse(ipdigits4.Text, out int part4) &&
+                int.TryParse(netmask1.Text, out int nm1) &&
+                int.TryParse(netmask2.Text, out int nm2) &&
+                int.TryParse(netmask3.Text, out int nm3) &&
+                int.TryParse(netmask4.Text, out int nm4))
+            {
+                var networkClass = GetNetworkClass(part1);
+                var cidr = GetCidr(nm1, nm2, nm3, nm4);
+                var wildcard = GetWildcard(nm1, nm2, nm3, nm4);
+                var networkAddress = GetNetworkAddress(part1, part2, part3, part4, nm1, nm2, nm3, nm4);
+                var broadcastAddress = GetBroadcastAddress(part1, part2, part3, part4, nm1, nm2, nm3, nm4);
+                var usableHostRange = GetUsableHostRange(networkAddress, broadcastAddress);
+
+                networkclass.Content = networkClass;
+                networktype.Content = $"/{cidr}";
+                wildcard1.Text = wildcard[0].ToString();
+                wildcard2.Text = wildcard[1].ToString();
+                wildcard3.Text = wildcard[2].ToString();
+                wildcard4.Text = wildcard[3].ToString();
+                NetworkAddress.Content = string.Join(".", networkAddress);
+                BroadcastAddress.Content = string.Join(".", broadcastAddress);
+                UsableHostRange.Content = $"{string.Join(".", usableHostRange.Item1)} - {string.Join(".", usableHostRange.Item2)}";
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid IP address and netmask parts.");
+            }
+        }
+
+        Dictionary<int, string> lookupTable = new Dictionary<int, string>
+        {
+            { 128, "A" },
+            { 192, "B" },
+            { 224, "C" },
+            { 240, "D" },
+            { 255, "E" }
+        };
+
+        private string GetNetworkClass(int firstOctet)
+        {
+            foreach (var entry in lookupTable)
+            {
+                if (firstOctet < entry.Key)
+                {
+                    return entry.Value;
+                }
+            }
+            return "Fejl";
+        }
+
+        private int GetCidr(int nm1, int nm2, int nm3, int nm4)
+        {
+            var binaryNetmask = $"{Convert.ToString(nm1, 2).PadLeft(8, '0')}" +
+                                $"{Convert.ToString(nm2, 2).PadLeft(8, '0')}" +
+                                $"{Convert.ToString(nm3, 2).PadLeft(8, '0')}" +
+                                $"{Convert.ToString(nm4, 2).PadLeft(8, '0')}";
+            return binaryNetmask.Count(c => c == '1');
+        }
+
+        private int[] GetWildcard(int nm1, int nm2, int nm3, int nm4)
+        {
+            return new int[]
+            {
+        255 - nm1,
+        255 - nm2,
+        255 - nm3,
+        255 - nm4
+            };
+        }
+
+        private int[] GetNetworkAddress(int ip1, int ip2, int ip3, int ip4, int nm1, int nm2, int nm3, int nm4)
+        {
+            return new int[]
+            {
+        ip1 & nm1,
+        ip2 & nm2,
+        ip3 & nm3,
+        ip4 & nm4
+            };
+        }
+
+        private int[] GetBroadcastAddress(int ip1, int ip2, int ip3, int ip4, int nm1, int nm2, int nm3, int nm4)
+        {
+            return new int[]
+            {
+        ip1 | (255 - nm1),
+        ip2 | (255 - nm2),
+        ip3 | (255 - nm3),
+        ip4 | (255 - nm4)
+            };
+        }
+
+        private Tuple<int[], int[]> GetUsableHostRange(int[] networkAddress, int[] broadcastAddress)
+        {
+            var startAddress = (int[])networkAddress.Clone();
+            var endAddress = (int[])broadcastAddress.Clone();
+
+            startAddress[3] += 1; // Network address + 1
+            endAddress[3] -= 1;   // Broadcast address - 1
+
+            return new Tuple<int[], int[]>(startAddress, endAddress);
+        }
+
     }
 }

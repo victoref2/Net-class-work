@@ -28,10 +28,16 @@
             <Grid>
                 <!-- IP Address Input -->
                 <Label Content="IP address" HorizontalAlignment="Left" Margin="35,35,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="ipdigits1" HorizontalAlignment="Left" Margin="111,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="ipdigits2" HorizontalAlignment="Left" Margin="161,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="ipdigits3" HorizontalAlignment="Left" Margin="211,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="ipdigits4" HorizontalAlignment="Left" Margin="261,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits1" HorizontalAlignment="Left" MaxLength="3" Text="{Binding ElementName=Sliderip1, Path=Value, Mode=TwoWay}" Margin="111,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits2" HorizontalAlignment="Left" MaxLength="3" Text="{Binding ElementName=Sliderip2, Path=Value, Mode=TwoWay}" Margin="161,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits3" HorizontalAlignment="Left" MaxLength="3" Text="{Binding ElementName=Sliderip3, Path=Value, Mode=TwoWay}" Margin="211,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="ipdigits4" HorizontalAlignment="Left" MaxLength="3" Text="{Binding ElementName=Sliderip4, Path=Value, Mode=TwoWay}" Margin="261,35,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+
+                <!--Sliders for ip address-->
+                <Slider x:Name="Sliderip1" HorizontalAlignment="Left" Margin="111,72,0,0" Maximum="255" Minimum="0" VerticalAlignment="Top" Width="50" Visibility="Hidden"/>
+                <Slider x:Name="Sliderip2" HorizontalAlignment="Left" Margin="111,72,0,0" Maximum="255" Minimum="0" VerticalAlignment="Top" Width="50" Visibility="Hidden"/>
+                <Slider x:Name="Sliderip3" HorizontalAlignment="Left" Margin="111,72,0,0" Maximum="255" Minimum="0" VerticalAlignment="Top" Width="50" Visibility="Hidden"/>
+                <Slider x:Name="Sliderip4" HorizontalAlignment="Left" Margin="111,72,0,0" Maximum="255" Minimum="0" VerticalAlignment="Top" Width="50" Visibility="Hidden"/>
 
                 <!-- IP Address in Binary -->
                 <TextBox x:Name="ipbinary1" HorizontalAlignment="Left" Margin="111,72,0,0" TextWrapping="Wrap" Text="{Binding ElementName=ipdigits1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
@@ -41,10 +47,10 @@
 
                 <!-- Netmask -->
                 <Label x:Name="Netmasklabel" Content="Netmask" HorizontalAlignment="Left" Margin="35,120,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="netmask1" HorizontalAlignment="Left" Margin="111,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="netmask2" HorizontalAlignment="Left" Margin="161,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="netmask3" HorizontalAlignment="Left" Margin="211,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="netmask4" HorizontalAlignment="Left" Margin="261,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask1" HorizontalAlignment="Left" MaxLength="3" Margin="111,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask2" HorizontalAlignment="Left" MaxLength="3" Margin="161,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask3" HorizontalAlignment="Left" MaxLength="3" Margin="211,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="netmask4" HorizontalAlignment="Left" MaxLength="3" Margin="261,120,0,0" TextWrapping="Wrap" PreviewTextInput="ipdigits1_PreviewTextInput" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
 
                 <!-- Netmask in Binary -->
                 <TextBox x:Name="netmaskbinary1" HorizontalAlignment="Left" Margin="111,157,0,0" TextWrapping="Wrap" Text="{Binding ElementName=netmask1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
@@ -54,10 +60,10 @@
 
                 <!-- Wildcard Mask -->
                 <Label x:Name="Wildcardlabel" Content="Wildcard" HorizontalAlignment="Left" Margin="35,200,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="wildcard1" HorizontalAlignment="Left" Margin="111,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="wildcard2" HorizontalAlignment="Left" Margin="161,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="wildcard3" HorizontalAlignment="Left" Margin="211,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
-                <TextBox x:Name="wildcard4" HorizontalAlignment="Left" Margin="261,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard1" HorizontalAlignment="Left" MaxLength="3" Margin="111,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard2" HorizontalAlignment="Left" MaxLength="3" Margin="161,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard3" HorizontalAlignment="Left" MaxLength="3" Margin="211,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
+                <TextBox x:Name="wildcard4" HorizontalAlignment="Left" MaxLength="3" Margin="261,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" Height="31" FontSize="22"/>
 
                 <!-- Wildcard in Binary -->
                 <TextBox x:Name="wildcardbinary1" HorizontalAlignment="Left" Margin="111,237,0,0" TextWrapping="Wrap" Text="{Binding ElementName=wildcard1, Path=Text, Mode=OneWay, Converter={StaticResource BinaryConverter}}" VerticalAlignment="Top" Width="50" FontSize="10"/>
